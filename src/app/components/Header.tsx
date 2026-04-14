@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ShoppingCart } from 'lucide-react';
 import { motion } from 'motion/react';
 import logo from 'figma:asset/d7a716283c29c3993aea9f83ce8a77f06de84978.png';
+import { useCart } from '../context/CartContext';
 
 export function Header() {
+  const { totalItems, toggleCart } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('#');
@@ -130,8 +132,19 @@ export function Header() {
           })}
         </nav>
 
-        {/* CTA Button */}
-        <div className="hidden lg:block">
+        {/* CTA Button & Cart */}
+        <div className="hidden lg:flex items-center gap-4">
+          <button 
+            onClick={toggleCart}
+            className="relative p-2 rounded-full hover:bg-gray-100/10 transition-colors"
+          >
+            <ShoppingCart className={scrolled ? 'text-[#1a2332]' : 'text-white'} />
+            {totalItems > 0 && (
+              <span className="absolute top-0 right-0 w-5 h-5 bg-red-500 text-white text-xs font-bold flex items-center justify-center rounded-full transform translate-x-1/4 -translate-y-1/4">
+                {totalItems}
+              </span>
+            )}
+          </button>
           <a
             href="#contact"
             className="px-6 py-2.5 bg-gradient-to-r from-[#8b6f47] to-[#6b5637] text-white text-sm font-medium rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
@@ -140,17 +153,30 @@ export function Header() {
           </a>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-2"
-        >
-          {mobileMenuOpen ? (
-            <X className={scrolled ? 'text-[#1a2332]' : 'text-white'} />
-          ) : (
-            <Menu className={scrolled ? 'text-[#1a2332]' : 'text-white'} />
-          )}
-        </button>
+        {/* Mobile Menu Button & Cart */}
+        <div className="lg:hidden flex items-center gap-2">
+          <button 
+            onClick={toggleCart}
+            className="relative p-2"
+          >
+            <ShoppingCart className={scrolled ? 'text-[#1a2332]' : 'text-white'} />
+            {totalItems > 0 && (
+              <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-[10px] font-bold flex items-center justify-center rounded-full">
+                {totalItems}
+              </span>
+            )}
+          </button>
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2"
+          >
+            {mobileMenuOpen ? (
+              <X className={scrolled ? 'text-[#1a2332]' : 'text-white'} />
+            ) : (
+              <Menu className={scrolled ? 'text-[#1a2332]' : 'text-white'} />
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}

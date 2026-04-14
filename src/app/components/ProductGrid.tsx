@@ -1,9 +1,12 @@
 import { motion } from 'motion/react';
 import { ShoppingCart } from 'lucide-react';
+import { useCart } from '../context/CartContext';
 
 export function ProductGrid() {
+  const { addToCart } = useCart();
   const products = [
     {
+      id: 'prod_1',
       image: 'https://images.unsplash.com/photo-1608623676098-c52439068319?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBzaGFtcG9vJTIwY29uZGl0aW9uZXJ8ZW58MXx8fHwxNzc0MzI2MDUyfDA&ixlib=rb-4.1.0&q=80&w=1080',
       name: 'Shampoo Phục Hồi',
       description: 'Làm sạch sâu, phục hồi tóc hư tổn',
@@ -11,12 +14,14 @@ export function ProductGrid() {
       badge: 'Bán chạy',
     },
     {
+      id: 'prod_2',
       image: 'https://images.unsplash.com/photo-1608623676098-c52439068319?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBzaGFtcG9vJTIwY29uZGl0aW9uZXJ8ZW58MXx8fHwxNzc0MzI2MDUyfDA&ixlib=rb-4.1.0&q=80&w=1080',
       name: 'Dầu Xả Dưỡng Ẩm',
       description: 'Nuôi dưỡng tóc mềm mượt tự nhiên',
       price: '420.000đ',
     },
     {
+      id: 'prod_3',
       image: 'https://images.unsplash.com/photo-1699373381667-a325cbf60dfe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYWlyJTIwb2lsJTIwc2VydW0lMjBib3R0bGV8ZW58MXx8fHwxNzc0MzI2MDUyfDA&ixlib=rb-4.1.0&q=80&w=1080',
       name: 'Tinh Dầu Dưỡng Tóc',
       description: 'Dưỡng ẩm, ngăn ngừa gãy rụng',
@@ -24,6 +29,7 @@ export function ProductGrid() {
       badge: 'Mới',
     },
     {
+      id: 'prod_4',
       image: 'https://images.unsplash.com/photo-1758788390320-16e1f280cf49?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYWlyJTIwbWFzayUyMHRyZWF0bWVudCUyMGphcnxlbnwxfHx8fDE3NzQzMjYwNTN8MA&ixlib=rb-4.1.0&q=80&w=1080',
       name: 'Mặt Nạ Tóc Cao Cấp',
       description: 'Phục hồi chuyên sâu cho tóc khô',
@@ -86,7 +92,15 @@ export function ProductGrid() {
                   </span>
                 </div>
 
-                <button className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#4FD1C5] to-[#38B2AC] text-white rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+                <button 
+                  onClick={() => addToCart({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image
+                  })}
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#4FD1C5] to-[#38B2AC] text-white rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+                >
                   <ShoppingCart className="w-4 h-4" />
                   <span className="font-medium text-sm">Thêm vào giỏ</span>
                 </button>

@@ -13,11 +13,15 @@ import { TrustSection } from './components/TrustSection';
 import { StatsTestimonials } from './components/StatsTestimonials';
 import { FinalCTA } from './components/FinalCTA';
 import { Footer } from './components/Footer';
+import { Cart } from './components/Cart';
+import { CartProvider } from './context/CartContext';
+import { Toaster } from 'sonner';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-white">
-      <TopBar />
+    <CartProvider>
+      <div className="min-h-screen bg-white">
+        <TopBar />
       <Header />
       <Hero />
       <BrandPhilosophy />
@@ -32,6 +36,9 @@ export default function App() {
       <StatsTestimonials />
       <FinalCTA />
       <Footer />
+      <Cart />
+      <Toaster position="top-center" richColors />
     </div>
+    </CartProvider>
   );
 }
