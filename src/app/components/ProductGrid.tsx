@@ -1,13 +1,15 @@
 import { motion } from 'motion/react';
 import { ShoppingCart } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import arganOilImg from '../../assets/argan-oil.jpg';
+import shampooImg from '../../assets/shampoo.png';
 
 export function ProductGrid() {
   const { addToCart } = useCart();
   const products = [
     {
       id: 'prod_1',
-      image: 'https://images.unsplash.com/photo-1608623676098-c52439068319?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBzaGFtcG9vJTIwY29uZGl0aW9uZXJ8ZW58MXx8fHwxNzc0MzI2MDUyfDA&ixlib=rb-4.1.0&q=80&w=1080',
+      image: shampooImg,
       name: 'Shampoo Phục Hồi',
       description: 'Làm sạch sâu, phục hồi tóc hư tổn',
       price: '450.000đ',
@@ -22,7 +24,7 @@ export function ProductGrid() {
     },
     {
       id: 'prod_3',
-      image: 'https://images.unsplash.com/photo-1699373381667-a325cbf60dfe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYWlyJTIwb2lsJTIwc2VydW0lMjBib3R0bGV8ZW58MXx8fHwxNzc0MzI2MDUyfDA&ixlib=rb-4.1.0&q=80&w=1080',
+      image: arganOilImg,
       name: 'Tinh Dầu Dưỡng Tóc',
       description: 'Dưỡng ẩm, ngăn ngừa gãy rụng',
       price: '380.000đ',
@@ -69,7 +71,7 @@ export function ProductGrid() {
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover p-8 group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-contain p-8 group-hover:scale-110 transition-transform duration-500"
                 />
                 {product.badge && (
                   <div className="absolute top-4 right-4 px-3 py-1 bg-[#D4AF37] text-white text-xs font-medium rounded-full">
