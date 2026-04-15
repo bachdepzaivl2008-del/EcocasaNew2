@@ -1,17 +1,72 @@
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Award, Users, Star } from 'lucide-react';
+import useEmblaCarousel from 'embla-carousel-react';
 import heroBg from 'figma:asset/c993cc25fda3c9ab4cfc5d636153c75cabc07763.png';
+import picture1 from '../../assets/Picture 1.jpg';
+import picture2 from '../../assets/Picture 2.jpg';
+import picture3 from '../../assets/Picture 3.jpg';
+import picture4 from '../../assets/Picture 4.jpg';
+import picture5 from '../../assets/Picture 5.jpg';
+
+const images = [heroBg, picture1, picture2, picture3, picture4, picture5];
 
 export function Hero() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 30 });
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const startAutoplay = useCallback((delay: number) => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      if (emblaApi) emblaApi.scrollNext();
+      // Sau khi tự động chuyển bằng thời gian chờ phụ, đặt lại vòng lặp chính về 12 giây
+      if (delay !== 12000) {
+        startAutoplay(12000);
+      }
+    }, delay);
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    
+    startAutoplay(12000); // Mặc định 12 giây chuyển ảnh
+    
+    const onPointerDown = () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+
+    const onPointerUp = () => {
+      // Khi người dùng dừng lướt (kéo thả xong), chờ 5s rồi tự lướt tiếp (sau đó về lại chu kỳ 12s)
+      startAutoplay(5000);
+    };
+
+    emblaApi.on('pointerDown', onPointerDown);
+    emblaApi.on('pointerUp', onPointerUp);
+
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+      emblaApi.off('pointerDown', onPointerDown);
+      emblaApi.off('pointerUp', onPointerUp);
+    };
+  }, [emblaApi, startAutoplay]);
+
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src={heroBg}
-          alt="Premium Luxury Interior"
-          className="w-full h-full object-cover"
-        />
+      {/* Background Image Carousel with Overlay */}
+      <div className="absolute inset-0 z-0 bg-[#11161d]">
+        <div className="overflow-hidden w-full h-full" ref={emblaRef}>
+          <div className="flex w-full h-full">
+            {images.map((img, index) => (
+              <div key={index} className="relative flex-[0_0_100%] min-w-0 w-full h-full">
+                <img
+                  src={img}
+                  alt={`Premium Luxury Interior ${index + 1}`}
+                  className="w-full h-full object-cover select-none pointer-events-none"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
         {/* Warmer overlay for interior feel and text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#11161d]/90 via-[#1a2332]/70 to-[#1a2332]/20" />
       </div>

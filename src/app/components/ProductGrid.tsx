@@ -3,6 +3,8 @@ import { ShoppingCart } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import arganOilImg from '../../assets/argan-oil.jpg';
 import shampooImg from '../../assets/shampoo.png';
+import conditionerImg from '../../assets/conditioner.png';
+import hairMaskImg from '../../assets/hair-mask.png';
 
 export function ProductGrid() {
   const { addToCart } = useCart();
@@ -17,7 +19,7 @@ export function ProductGrid() {
     },
     {
       id: 'prod_2',
-      image: 'https://images.unsplash.com/photo-1608623676098-c52439068319?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBzaGFtcG9vJTIwY29uZGl0aW9uZXJ8ZW58MXx8fHwxNzc0MzI2MDUyfDA&ixlib=rb-4.1.0&q=80&w=1080',
+      image: conditionerImg,
       name: 'Dầu Xả Dưỡng Ẩm',
       description: 'Nuôi dưỡng tóc mềm mượt tự nhiên',
       price: '420.000đ',
@@ -32,8 +34,8 @@ export function ProductGrid() {
     },
     {
       id: 'prod_4',
-      image: 'https://images.unsplash.com/photo-1758788390320-16e1f280cf49?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYWlyJTIwbWFzayUyMHRyZWF0bWVudCUyMGphcnxlbnwxfHx8fDE3NzQzMjYwNTN8MA&ixlib=rb-4.1.0&q=80&w=1080',
-      name: 'Mặt Nạ Tóc Cao Cấp',
+      image: hairMaskImg,
+      name: 'Tinh dầu dưỡng bóng',
       description: 'Phục hồi chuyên sâu cho tóc khô',
       price: '520.000đ',
     },
