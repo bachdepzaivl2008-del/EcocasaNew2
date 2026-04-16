@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Youtube, MapPin, Phone, Mail } from 'lucide-react';
+import logo from 'figma:asset/d7a716283c29c3993aea9f83ce8a77f06de84978.png';
 
 export function Footer() {
   return (
@@ -8,8 +9,8 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-[#8b6f47] to-[#6b5637] rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">EC</span>
+              <div className="w-11 h-11 bg-gradient-to-br from-[#8b6f47] to-[#6b5637] rounded-xl flex items-center justify-center overflow-hidden shadow-md">
+                <img src={logo} alt="ECOCASA Logo" className="w-full h-full object-cover" />
               </div>
               <div className="text-2xl font-bold">ECOCASA</div>
             </div>
