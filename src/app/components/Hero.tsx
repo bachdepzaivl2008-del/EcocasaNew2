@@ -11,7 +11,12 @@ import picture5 from '../../assets/Picture 5.jpg';
 
 const images = [heroBg, picture1, picture2, picture3, picture4, picture5];
 
-export function Hero() {
+interface HeroProps {
+  onOpenLiving: () => void;
+  onOpenCosmetics: () => void;
+}
+
+export function Hero({ onOpenLiving, onOpenCosmetics }: HeroProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 30 });
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -114,19 +119,19 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4 mb-14"
           >
-            <a
-              href="#living"
+            <button
+              onClick={onOpenLiving}
               className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-gradient-to-r from-[#8b6f47] to-[#6b5637] text-white rounded-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group"
             >
               <span className="font-medium text-sm tracking-wide">Khám phá EcoCasa Living</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
-            <a
-              href="#haircare"
+            </button>
+            <button
+              onClick={onOpenCosmetics}
               className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white/5 backdrop-blur-sm text-white border border-white/30 rounded-md hover:bg-white/10 hover:border-white/50 transition-all duration-300"
             >
               <span className="font-medium text-sm tracking-wide">Dịch vụ PantioSalon</span>
-            </a>
+            </button>
           </motion.div>
 
           {/* Trust Badges */}

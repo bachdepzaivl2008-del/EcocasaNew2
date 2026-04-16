@@ -31,7 +31,7 @@ export function StatsTestimonials() {
   ];
 
   return (
-    <section className="py-24 bg-white">
+    <section id="reviews" className="py-24 bg-white">
       <div className="max-w-[1400px] mx-auto px-6">
         {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-20">

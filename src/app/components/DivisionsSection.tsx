@@ -1,9 +1,14 @@
 import { motion } from 'motion/react';
 import { Building2, Sparkles, ArrowRight } from 'lucide-react';
 
-export function DivisionsSection() {
+interface DivisionsSectionProps {
+  onOpenLiving: () => void;
+  onOpenCosmetics: () => void;
+}
+
+export function DivisionsSection({ onOpenLiving, onOpenCosmetics }: DivisionsSectionProps) {
   return (
-    <section id="about" className="py-24 bg-white">
+    <section id="ecosystem" className="py-24 bg-white">
       <div className="max-w-[1400px] mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -57,13 +62,13 @@ export function DivisionsSection() {
                 ))}
               </ul>
 
-              <a
-                href="#living"
-                className="inline-flex items-center gap-2 text-[#8b6f47] font-medium group-hover:gap-3 transition-all"
+              <button
+                onClick={onOpenLiving}
+                className="inline-flex items-center gap-2 text-[#8b6f47] font-medium group-hover:gap-3 transition-all cursor-pointer"
               >
                 Tìm hiểu thêm
                 <ArrowRight className="w-5 h-5" />
-              </a>
+              </button>
             </div>
 
             {/* Background Pattern */}
@@ -106,13 +111,13 @@ export function DivisionsSection() {
                 ))}
               </ul>
 
-              <a
-                href="#haircare"
-                className="inline-flex items-center gap-2 text-white font-medium group-hover:gap-3 transition-all"
+              <button
+                onClick={onOpenCosmetics}
+                className="inline-flex items-center gap-2 text-white font-medium group-hover:gap-3 transition-all cursor-pointer"
               >
                 Khám phá sản phẩm
                 <ArrowRight className="w-5 h-5" />
-              </a>
+              </button>
             </div>
 
             {/* Background Pattern */}

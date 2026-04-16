@@ -1,44 +1,67 @@
+import { useState, useEffect } from 'react';
+import { AnimatePresence } from 'motion/react';
 import { TopBar } from './components/TopBar';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { BrandPhilosophy } from './components/BrandPhilosophy';
 import { DivisionsSection } from './components/DivisionsSection';
-import { InteriorFeature } from './components/InteriorFeature';
-import { ProcessTimeline } from './components/ProcessTimeline';
-import { ProjectsGallery } from './components/ProjectsGallery';
-import { TransitionCopy } from './components/TransitionCopy';
-import { HaircareFeature } from './components/HaircareFeature';
-import { ProductGrid } from './components/ProductGrid';
 import { TrustSection } from './components/TrustSection';
 import { StatsTestimonials } from './components/StatsTestimonials';
-import { FinalCTA } from './components/FinalCTA';
 import { Footer } from './components/Footer';
 import { Cart } from './components/Cart';
 import { CartProvider } from './context/CartContext';
 import { Toaster } from 'sonner';
+import { LivingSubPage } from './components/LivingSubPage';
+import { CosmeticsSubPage } from './components/CosmeticsSubPage';
+
+export type ActivePage = 'home' | 'living' | 'cosmetics';
 
 export default function App() {
+  const [activePage, setActivePage] = useState<ActivePage>('home');
+
+  // Scroll to top when switching pages
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [activePage]);
+
+  const handleBack = () => setActivePage('home');
+
   return (
     <CartProvider>
       <div className="min-h-screen bg-white">
         <TopBar />
-      <Header />
-      <Hero />
-      <BrandPhilosophy />
-      <DivisionsSection />
-      <InteriorFeature />
-      <ProcessTimeline />
-      <ProjectsGallery />
-      <TransitionCopy />
-      <HaircareFeature />
-      <ProductGrid />
-      <TrustSection />
-      <StatsTestimonials />
-      <FinalCTA />
-      <Footer />
-      <Cart />
-      <Toaster position="top-center" richColors />
-    </div>
+        <Header activePage={activePage} onNavigateHome={handleBack} />
+
+        <AnimatePresence mode="wait">
+          {activePage === 'home' && (
+            <div key="home">
+              <Hero
+                onOpenLiving={() => setActivePage('living')}
+                onOpenCosmetics={() => setActivePage('cosmetics')}
+              />
+              <BrandPhilosophy />
+              <DivisionsSection
+                onOpenLiving={() => setActivePage('living')}
+                onOpenCosmetics={() => setActivePage('cosmetics')}
+              />
+              <TrustSection />
+              <StatsTestimonials />
+            </div>
+          )}
+
+          {activePage === 'living' && (
+            <LivingSubPage key="living" onBack={handleBack} />
+          )}
+
+          {activePage === 'cosmetics' && (
+            <CosmeticsSubPage key="cosmetics" onBack={handleBack} />
+          )}
+        </AnimatePresence>
+
+        <Footer />
+        <Cart />
+        <Toaster position="top-center" richColors />
+      </div>
     </CartProvider>
   );
 }
