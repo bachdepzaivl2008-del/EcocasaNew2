@@ -30,7 +30,7 @@ export function ProjectsGallery() {
   ];
 
   return (
-    <section id="projects" className="py-24 bg-gray-50">
+    <section id="projects" className="py-16 md:py-24 bg-gray-50">
       <div className="max-w-[1400px] mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

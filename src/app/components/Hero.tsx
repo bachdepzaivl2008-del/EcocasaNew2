@@ -58,7 +58,7 @@ export function Hero({ onOpenLiving, onOpenCosmetics }: HeroProps) {
   }, [emblaApi, startAutoplay]);
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden">
       {/* Background Image Carousel with Overlay */}
       <div className="absolute inset-0 z-0 bg-[#11161d]">
         <div className="overflow-hidden w-full h-full" ref={emblaRef}>
@@ -98,10 +98,10 @@ export function Hero({ onOpenLiving, onOpenCosmetics }: HeroProps) {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-white mb-6"
           >
-            <span className="block text-4xl md:text-6xl font-semibold mb-2 tracking-tight">
+            <span className="block text-3xl sm:text-4xl md:text-6xl font-semibold mb-2 tracking-tight">
               {t.hero.title1}
             </span>
-            <span className="block text-4xl md:text-6xl font-light text-white/90 tracking-tight">
+            <span className="block text-3xl sm:text-4xl md:text-6xl font-light text-white/90 tracking-tight">
               {t.hero.title2}
             </span>
           </motion.h1>
@@ -143,9 +143,9 @@ export function Hero({ onOpenLiving, onOpenCosmetics }: HeroProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-wrap gap-8 text-white/70 text-xs tracking-wider uppercase font-medium"
+            className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-8 text-white/70 text-xs tracking-wider uppercase font-medium"
           >
-            <div className="flex items-center gap-2">
+            <div className="flex items-center justify-center sm:justify-start gap-2">
               <Award className="w-4 h-4 text-[#8b6f47]" />
               <span>{t.hero.stat1}</span>
             </div>

@@ -14,16 +14,16 @@ export function BrandPhilosophy() {
   ];
 
   return (
-    <section id="about" className="py-[8.75rem] bg-gradient-to-b from-white to-gray-50">
+    <section id="about" className="py-16 md:py-[8.75rem] bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-[1400px] mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto text-center mb-14"
+          className="max-w-3xl mx-auto text-center mb-10 md:mb-14"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-[#1a2332] mb-6">
+          <h2 className="text-3xl md:text-5xl font-bold text-[#1a2332] mb-4 md:mb-6">
             {t.brand.title}
           </h2>
           <p className="text-lg text-gray-600 leading-relaxed">

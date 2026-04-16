@@ -11,7 +11,7 @@ export function InteriorFeature() {
   ];
 
   return (
-    <section id="living" className="py-24 bg-gradient-to-b from-gray-50 to-white">
+    <section id="living" className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-[1400px] mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Content Left */}

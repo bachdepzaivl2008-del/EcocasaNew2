@@ -31,7 +31,7 @@ export function ProcessTimeline() {
   ];
 
   return (
-    <section id="process" className="py-24 bg-white">
+    <section id="process" className="py-16 md:py-24 bg-white">
       <div className="max-w-[1400px] mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

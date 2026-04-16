@@ -10,7 +10,7 @@ interface DivisionsSectionProps {
 export function DivisionsSection({ onOpenLiving, onOpenCosmetics }: DivisionsSectionProps) {
   const { t } = useLang();
   return (
-    <section id="ecosystem" className="py-[8.75rem] bg-white">
+    <section id="ecosystem" className="py-16 md:py-[8.75rem] bg-white">
       <div className="max-w-[1400px] mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -19,7 +19,7 @@ export function DivisionsSection({ onOpenLiving, onOpenCosmetics }: DivisionsSec
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-[#1a2332] mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold text-[#1a2332] mb-4">
             {t.ecosystem.title}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -41,7 +41,7 @@ export function DivisionsSection({ onOpenLiving, onOpenCosmetics }: DivisionsSec
                 <Building2 className="w-8 h-8 text-white" />
               </div>
               
-              <h3 className="text-3xl font-bold text-white mb-4">
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
                 EcoCasa Living
               </h3>
               
@@ -85,7 +85,7 @@ export function DivisionsSection({ onOpenLiving, onOpenCosmetics }: DivisionsSec
                 <Sparkles className="w-8 h-8 text-white" />
               </div>
               
-              <h3 className="text-3xl font-bold text-white mb-4">
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
                 PantioSalon / EcoCasa Haircare
               </h3>
               

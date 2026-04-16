@@ -29,10 +29,10 @@ export function StatsTestimonials() {
   ];
 
   return (
-    <section id="reviews" className="py-[8.75rem] bg-white">
+    <section id="reviews" className="py-16 md:py-[8.75rem] bg-white">
       <div className="max-w-[1400px] mx-auto px-6">
         {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12 md:mb-20">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -42,7 +42,7 @@ export function StatsTestimonials() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="text-center"
             >
-              <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-[#8b6f47] to-[#4FD1C5] bg-clip-text text-transparent mb-3">
+              <div className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-[#8b6f47] to-[#4FD1C5] bg-clip-text text-transparent mb-2 md:mb-3">
                 {stat.number}
               </div>
               <p className="text-gray-600 font-medium">{stat.label}</p>
@@ -58,7 +58,7 @@ export function StatsTestimonials() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-[#1a2332] mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold text-[#1a2332] mb-4">
             {t.stats.title}
           </h2>
           <p className="text-lg text-gray-600">
@@ -74,7 +74,7 @@ export function StatsTestimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100"
+              className="bg-gradient-to-br from-gray-50 to-white p-6 md:p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100"
             >
               <Quote className="w-10 h-10 text-[#4FD1C5] mb-4" />
               

@@ -3,7 +3,7 @@ import { Building2, Sparkles, Phone, Mail, ArrowRight } from 'lucide-react';
 
 export function FinalCTA() {
   return (
-    <section id="contact" className="py-24 bg-gradient-to-b from-gray-50 to-white">
+    <section id="contact" className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-[1400px] mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

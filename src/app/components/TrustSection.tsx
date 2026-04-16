@@ -77,10 +77,10 @@ function BigCard({ reason, index, scrollYProgress }: BigCardProps) {
       {/* Card */}
       <div
         className="w-full max-w-5xl mx-auto rounded-3xl shadow-2xl overflow-hidden grid md:grid-cols-2"
-        style={{ minHeight: '62vh', background: reason.bg }}
+        style={{ minHeight: 'auto', background: reason.bg }}
       >
         {/* Left – coloured icon panel */}
-        <div className={`bg-gradient-to-br ${reason.color} flex flex-col items-center justify-center gap-6 p-12 md:p-16`}>
+        <div className={`bg-gradient-to-br ${reason.color} flex flex-col items-center justify-center gap-4 md:gap-6 p-8 md:p-16`}>
           <div className="w-28 h-28 bg-white/15 backdrop-blur-sm rounded-3xl flex items-center justify-center shadow-inner">
             <Icon className="w-16 h-16 text-white drop-shadow-md" />
           </div>
@@ -90,12 +90,12 @@ function BigCard({ reason, index, scrollYProgress }: BigCardProps) {
         </div>
 
         {/* Right – text content */}
-        <div className="flex flex-col justify-center gap-5 p-10 md:p-14">
-          <h3 className="text-3xl md:text-4xl font-bold text-[#1a2332] leading-snug">
+        <div className="flex flex-col justify-center gap-4 md:gap-5 p-6 sm:p-8 md:p-14">
+          <h3 className="text-2xl md:text-4xl font-bold text-[#1a2332] leading-snug">
             {reason.title}
           </h3>
           <div className="w-12 h-1 rounded-full bg-gradient-to-r from-[#8b6f47] to-[#d4af37]" />
-          <p className="text-gray-600 text-base md:text-lg leading-relaxed">
+          <p className="text-gray-600 text-sm md:text-lg leading-relaxed">
             {reason.description}
           </p>
         </div>
@@ -146,7 +146,7 @@ export function TrustSection() {
       className="relative"
     >
       {/* Sticky panel */}
-      <div className="sticky top-0 h-screen flex flex-col bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+      <div className="sticky top-0 h-[100svh] flex flex-col bg-gradient-to-b from-gray-50 to-white overflow-hidden">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
@@ -155,7 +155,7 @@ export function TrustSection() {
           transition={{ duration: 0.6 }}
           className="text-center pt-16 pb-2 shrink-0"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-[#1a2332] mb-3">
+          <h2 className="text-3xl md:text-5xl font-bold text-[#1a2332] mb-3">
             {t.trust.title}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">

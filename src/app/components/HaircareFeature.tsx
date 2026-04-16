@@ -21,7 +21,7 @@ export function HaircareFeature() {
   ];
 
   return (
-    <section id="haircare" className="py-24 bg-gradient-to-b from-white to-[#4FD1C5]/5">
+    <section id="haircare" className="py-16 md:py-24 bg-gradient-to-b from-white to-[#4FD1C5]/5">
       <div className="max-w-[1400px] mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Image Left */}
