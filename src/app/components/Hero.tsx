@@ -120,6 +120,7 @@ export function Hero({ onOpenLiving, onOpenCosmetics }: HeroProps) {
             className="flex flex-col sm:flex-row gap-4 mb-14"
           >
             <button
+              data-guide="living"
               onClick={onOpenLiving}
               className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-gradient-to-r from-[#8b6f47] to-[#6b5637] text-white rounded-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group"
             >
@@ -127,6 +128,7 @@ export function Hero({ onOpenLiving, onOpenCosmetics }: HeroProps) {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
             <button
+              data-guide="cosmetics"
               onClick={onOpenCosmetics}
               className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white/5 backdrop-blur-sm text-white border border-white/30 rounded-md hover:bg-white/10 hover:border-white/50 transition-all duration-300"
             >

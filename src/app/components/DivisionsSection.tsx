@@ -8,14 +8,14 @@ interface DivisionsSectionProps {
 
 export function DivisionsSection({ onOpenLiving, onOpenCosmetics }: DivisionsSectionProps) {
   return (
-    <section id="ecosystem" className="py-24 bg-white">
+    <section id="ecosystem" className="py-[8.75rem] bg-white">
       <div className="max-w-[1400px] mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-[#1a2332] mb-4">
             Hệ sinh thái ECOCASA

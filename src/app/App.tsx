@@ -13,11 +13,24 @@ import { CartProvider } from './context/CartContext';
 import { Toaster } from 'sonner';
 import { LivingSubPage } from './components/LivingSubPage';
 import { CosmeticsSubPage } from './components/CosmeticsSubPage';
+import { OnboardingGuide } from './components/OnboardingGuide';
 
 export type ActivePage = 'home' | 'living' | 'cosmetics';
 
 export default function App() {
   const [activePage, setActivePage] = useState<ActivePage>('home');
+  // Show guide once per page load (not persisted – reloading resets it)
+  const [showGuide, setShowGuide] = useState(true);
+
+  // On first load: disable browser scroll restoration so the page always
+  // starts at top. This ensures OnboardingGuide measures hero buttons correctly.
+  useEffect(() => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, []);
 
   // Scroll to top when switching pages
   useEffect(() => {
@@ -61,6 +74,9 @@ export default function App() {
         <Footer />
         <Cart />
         <Toaster position="top-center" richColors />
+        {activePage === 'home' && (
+          <OnboardingGuide show={showGuide} onDismiss={() => setShowGuide(false)} />
+        )}
       </div>
     </CartProvider>
   );

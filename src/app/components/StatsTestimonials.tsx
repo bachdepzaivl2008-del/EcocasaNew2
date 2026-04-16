@@ -31,7 +31,7 @@ export function StatsTestimonials() {
   ];
 
   return (
-    <section id="reviews" className="py-24 bg-white">
+    <section id="reviews" className="py-[8.75rem] bg-white">
       <div className="max-w-[1400px] mx-auto px-6">
         {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
@@ -58,7 +58,7 @@ export function StatsTestimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-[#1a2332] mb-4">
             Khách hàng nói gì về chúng tôi

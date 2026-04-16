@@ -1,51 +1,192 @@
-import { motion } from 'motion/react';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring, MotionValue } from 'motion/react';
 import { Award, Users, Clock, Shield, Lightbulb, HeartHandshake } from 'lucide-react';
 
-export function TrustSection() {
-  const reasons = [
-    {
-      icon: Award,
-      title: 'Chuyên nghiệp đẳng cấp',
-      description: 'Đội ngũ kiến trúc sư và chuyên gia hàng đầu với hơn 10 năm kinh nghiệm',
-    },
-    {
-      icon: Users,
-      title: 'Đồng hành tận tâm',
-      description: 'Tư vấn miễn phí, hỗ trợ 24/7 trong suốt quá trình triển khai',
-    },
-    {
-      icon: Clock,
-      title: 'Cam kết tiến độ',
-      description: 'Hoàn thành đúng hạn, minh bạch từng giai đoạn công việc',
-    },
-    {
-      icon: Shield,
-      title: 'Bảo hành dài hạn',
-      description: 'Chế độ bảo hành toàn diện, hỗ trợ sau bán hàng chuyên nghiệp',
-    },
-    {
-      icon: Lightbulb,
-      title: 'Sáng tạo không giới hạn',
-      description: 'Thiết kế độc quyền, phù hợp với phong cách sống của từng gia đình',
-    },
-    {
-      icon: HeartHandshake,
-      title: 'Giá trị bền vững',
-      description: 'Sản phẩm và dịch vụ thân thiện môi trường, an toàn cho sức khỏe',
-    },
-  ];
+const reasons = [
+  {
+    icon: Award,
+    title: 'Chuyên nghiệp đẳng cấp',
+    description:
+      'Đội ngũ kiến trúc sư và chuyên gia hàng đầu với hơn 10 năm kinh nghiệm, từng thực hiện hơn 200 dự án lớn nhỏ trên toàn quốc.',
+    color: 'from-[#8b6f47] to-[#5a3e28]',
+    bg: '#f9f4ef',
+  },
+  {
+    icon: Users,
+    title: 'Đồng hành tận tâm',
+    description:
+      'Tư vấn miễn phí, hỗ trợ 24/7 trong suốt quá trình triển khai. Khách hàng luôn là trung tâm trong mọi quyết định của chúng tôi.',
+    color: 'from-[#4FD1C5] to-[#2C9A8F]',
+    bg: '#f0fdfb',
+  },
+  {
+    icon: Clock,
+    title: 'Cam kết tiến độ',
+    description:
+      'Hoàn thành đúng hạn, minh bạch từng giai đoạn công việc. Chúng tôi biết thời gian của bạn là vô giá.',
+    color: 'from-[#667eea] to-[#764ba2]',
+    bg: '#f5f3ff',
+  },
+  {
+    icon: Shield,
+    title: 'Bảo hành dài hạn',
+    description:
+      'Chế độ bảo hành toàn diện, hỗ trợ sau bán hàng chuyên nghiệp. Mọi sản phẩm đều đi kèm cam kết chất lượng rõ ràng.',
+    color: 'from-[#f093fb] to-[#f5576c]',
+    bg: '#fff0f6',
+  },
+  {
+    icon: Lightbulb,
+    title: 'Sáng tạo không giới hạn',
+    description:
+      'Thiết kế độc quyền, phù hợp với cá tính và phong cách sống của từng gia đình. Chúng tôi không bao giờ dùng template có sẵn.',
+    color: 'from-[#4facfe] to-[#00c6fb]',
+    bg: '#f0f8ff',
+  },
+  {
+    icon: HeartHandshake,
+    title: 'Giá trị bền vững',
+    description:
+      'Sản phẩm và dịch vụ thân thiện với môi trường, an toàn cho sức khoẻ. Chúng tôi xây dựng không gian sống xanh cho thế hệ tương lai.',
+    color: 'from-[#43e97b] to-[#1cb476]',
+    bg: '#f0fff6',
+  },
+];
+
+const N = reasons.length;
+
+/* ── Dot indicator per card ─────────────────────────────────────── */
+function Dot({ index, scrollYProgress }: { index: number; scrollYProgress: MotionValue<number> }) {
+  const start = index / N;
+  const end   = (index + 1) / N;
+  const scale = useTransform(scrollYProgress, [start, end - 0.001, end], [1.8, 1.8, 1]);
+  const bg    = useTransform(scrollYProgress, [start, end - 0.001, end], ['#8b6f47', '#8b6f47', '#d1d5db']);
+  return (
+    <motion.div
+      style={{ scale, backgroundColor: bg }}
+      className="w-2 h-2 rounded-full transition-colors"
+    />
+  );
+}
+
+/* ── One full-width card ─────────────────────────────────────────── */
+interface BigCardProps {
+  reason: (typeof reasons)[number];
+  index: number;
+  scrollYProgress: MotionValue<number>;
+}
+
+function BigCard({ reason, index, scrollYProgress }: BigCardProps) {
+  const Icon  = reason.icon;
+  const start = index / N;
+  const end   = (index + 1) / N;
+
+  // Build input / output for x (horizontal slide)
+  type InputRange  = number[];
+  type OutputRange = string[];
+  let inputRange : InputRange;
+  let outputRange: OutputRange;
+
+  // SLIDE_SPAN = 0.09 → each slide travels over ~63vh of scroll (smoother)
+  const SPAN = 0.09;
+
+  if (index === 0) {
+    // First card: already on-screen, exits left
+    inputRange  = [end - SPAN, end];
+    outputRange = ['0vw', '-105vw'];
+  } else if (index === N - 1) {
+    // Last card: enters from right, stays
+    inputRange  = [start - SPAN, start];
+    outputRange = ['105vw', '0vw'];
+  } else {
+    // Middle cards: enter from right → rest → exit left
+    inputRange  = [start - SPAN, start, end - SPAN, end];
+    outputRange = ['105vw', '0vw', '0vw', '-105vw'];
+  }
+
+  // Raw scroll-driven value
+  const rawX = useTransform(scrollYProgress, inputRange, outputRange);
+  // Spring wrapping for smooth, organic motion
+  const x = useSpring(rawX, { stiffness: 65, damping: 22, mass: 0.8 });
 
   return (
-    <section id="why-ecocasa" className="py-24 bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-[1400px] mx-auto px-6">
+    <motion.div
+      style={{ x }}
+      className="absolute inset-0 flex items-center justify-center px-6 py-4"
+    >
+      {/* Card */}
+      <div
+        className="w-full max-w-5xl mx-auto rounded-3xl shadow-2xl overflow-hidden grid md:grid-cols-2"
+        style={{ minHeight: '62vh', background: reason.bg }}
+      >
+        {/* Left – coloured icon panel */}
+        <div className={`bg-gradient-to-br ${reason.color} flex flex-col items-center justify-center gap-6 p-12 md:p-16`}>
+          <div className="w-28 h-28 bg-white/15 backdrop-blur-sm rounded-3xl flex items-center justify-center shadow-inner">
+            <Icon className="w-16 h-16 text-white drop-shadow-md" />
+          </div>
+          <span className="text-white/55 text-xs font-semibold tracking-[0.2em] uppercase select-none">
+            {String(index + 1).padStart(2, '0')} &nbsp;/&nbsp; {String(N).padStart(2, '0')}
+          </span>
+        </div>
+
+        {/* Right – text content */}
+        <div className="flex flex-col justify-center gap-5 p-10 md:p-14">
+          <h3 className="text-3xl md:text-4xl font-bold text-[#1a2332] leading-snug">
+            {reason.title}
+          </h3>
+          <div className="w-12 h-1 rounded-full bg-gradient-to-r from-[#8b6f47] to-[#d4af37]" />
+          <p className="text-gray-600 text-base md:text-lg leading-relaxed">
+            {reason.description}
+          </p>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Scroll hint ─────────────────────────────────────────────────── */
+function ScrollHint({ scrollYProgress }: { scrollYProgress: MotionValue<number> }) {
+  const opacity = useTransform(scrollYProgress, [0, 0.05, 0.85, 0.95], [0, 1, 1, 0]);
+  return (
+    <motion.p
+      style={{ opacity }}
+      className="text-center text-sm text-gray-400 tracking-wide"
+    >
+      ↓ Lướt để xem thêm
+    </motion.p>
+  );
+}
+
+/* ── Main export ─────────────────────────────────────────────────── */
+export function TrustSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end start'],
+  });
+
+  // Container height: (N * 0.9 + 1) viewports
+  const totalHeight = `${Math.round((N * 0.9 + 1) * 100)}vh`;
+
+  return (
+    <div
+      id="why-ecocasa"
+      ref={containerRef}
+      style={{ height: totalHeight }}
+      className="relative"
+    >
+      {/* Sticky panel */}
+      <div className="sticky top-0 h-screen flex flex-col bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+        {/* Heading */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center pt-16 pb-2 shrink-0"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-[#1a2332] mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#1a2332] mb-3">
             Tại sao chọn ECOCASA?
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -53,29 +194,25 @@ export function TrustSection() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {reasons.map((reason, index) => (
-            <motion.div
-              key={reason.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group"
-            >
-              <div className="w-14 h-14 bg-gradient-to-br from-[#4FD1C5] to-[#38B2AC] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                <reason.icon className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-[#1a2332] mb-3">
-                {reason.title}
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                {reason.description}
-              </p>
-            </motion.div>
+        {/* Dot indicators */}
+        <div className="flex justify-center gap-3 py-2 shrink-0">
+          {reasons.map((_, i) => (
+            <Dot key={i} index={i} scrollYProgress={scrollYProgress} />
           ))}
         </div>
+
+        {/* Cards (absolutely stacked, each slideable) */}
+        <div className="relative flex-1 min-h-0">
+          {reasons.map((reason, i) => (
+            <BigCard key={reason.title} reason={reason} index={i} scrollYProgress={scrollYProgress} />
+          ))}
+        </div>
+
+        {/* Scroll hint */}
+        <div className="shrink-0 pb-6">
+          <ScrollHint scrollYProgress={scrollYProgress} />
+        </div>
       </div>
-    </section>
+    </div>
   );
 }
