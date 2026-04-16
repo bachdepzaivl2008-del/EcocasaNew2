@@ -14,6 +14,7 @@ import { Toaster } from 'sonner';
 import { LivingSubPage } from './components/LivingSubPage';
 import { CosmeticsSubPage } from './components/CosmeticsSubPage';
 import { OnboardingGuide } from './components/OnboardingGuide';
+import { LanguageProvider } from './context/LanguageContext';
 
 export type ActivePage = 'home' | 'living' | 'cosmetics';
 
@@ -40,6 +41,7 @@ export default function App() {
   const handleBack = () => setActivePage('home');
 
   return (
+    <LanguageProvider>
     <CartProvider>
       <div className="min-h-screen bg-white">
         <TopBar />
@@ -79,5 +81,6 @@ export default function App() {
         )}
       </div>
     </CartProvider>
+    </LanguageProvider>
   );
 }

@@ -1,13 +1,11 @@
 import { motion } from 'motion/react';
 import { Star, Quote } from 'lucide-react';
+import { useLang } from '../context/LanguageContext';
 
 export function StatsTestimonials() {
-  const stats = [
-    { number: '200+', label: 'Dự án hoàn thành' },
-    { number: '1000+', label: 'Khách hàng hài lòng' },
-    { number: '15+', label: 'Năm kinh nghiệm' },
-    { number: '4.9/5.0', label: 'Đánh giá trung bình' },
-  ];
+  const { t } = useLang();
+
+  const stats = t.stats.items.map(item => ({ number: item.value, label: item.label }));
 
   const testimonials = [
     {
@@ -61,10 +59,10 @@ export function StatsTestimonials() {
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-[#1a2332] mb-4">
-            Khách hàng nói gì về chúng tôi
+            {t.stats.title}
           </h2>
           <p className="text-lg text-gray-600">
-            Niềm tin và sự hài lòng của khách hàng là động lực lớn nhất
+            {t.stats.subtitle}
           </p>
         </motion.div>
 

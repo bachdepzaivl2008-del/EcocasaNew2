@@ -1,59 +1,19 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring, MotionValue } from 'motion/react';
 import { Award, Users, Clock, Shield, Lightbulb, HeartHandshake } from 'lucide-react';
+import { useLang } from '../context/LanguageContext';
 
-const reasons = [
-  {
-    icon: Award,
-    title: 'Chuyên nghiệp đẳng cấp',
-    description:
-      'Đội ngũ kiến trúc sư và chuyên gia hàng đầu với hơn 10 năm kinh nghiệm, từng thực hiện hơn 200 dự án lớn nhỏ trên toàn quốc.',
-    color: 'from-[#8b6f47] to-[#5a3e28]',
-    bg: '#f9f4ef',
-  },
-  {
-    icon: Users,
-    title: 'Đồng hành tận tâm',
-    description:
-      'Tư vấn miễn phí, hỗ trợ 24/7 trong suốt quá trình triển khai. Khách hàng luôn là trung tâm trong mọi quyết định của chúng tôi.',
-    color: 'from-[#4FD1C5] to-[#2C9A8F]',
-    bg: '#f0fdfb',
-  },
-  {
-    icon: Clock,
-    title: 'Cam kết tiến độ',
-    description:
-      'Hoàn thành đúng hạn, minh bạch từng giai đoạn công việc. Chúng tôi biết thời gian của bạn là vô giá.',
-    color: 'from-[#667eea] to-[#764ba2]',
-    bg: '#f5f3ff',
-  },
-  {
-    icon: Shield,
-    title: 'Bảo hành dài hạn',
-    description:
-      'Chế độ bảo hành toàn diện, hỗ trợ sau bán hàng chuyên nghiệp. Mọi sản phẩm đều đi kèm cam kết chất lượng rõ ràng.',
-    color: 'from-[#f093fb] to-[#f5576c]',
-    bg: '#fff0f6',
-  },
-  {
-    icon: Lightbulb,
-    title: 'Sáng tạo không giới hạn',
-    description:
-      'Thiết kế độc quyền, phù hợp với cá tính và phong cách sống của từng gia đình. Chúng tôi không bao giờ dùng template có sẵn.',
-    color: 'from-[#4facfe] to-[#00c6fb]',
-    bg: '#f0f8ff',
-  },
-  {
-    icon: HeartHandshake,
-    title: 'Giá trị bền vững',
-    description:
-      'Sản phẩm và dịch vụ thân thiện với môi trường, an toàn cho sức khoẻ. Chúng tôi xây dựng không gian sống xanh cho thế hệ tương lai.',
-    color: 'from-[#43e97b] to-[#1cb476]',
-    bg: '#f0fff6',
-  },
+const COLORS = [
+  { color: 'from-[#8b6f47] to-[#5a3e28]', bg: '#f9f4ef' },
+  { color: 'from-[#4FD1C5] to-[#2C9A8F]', bg: '#f0fdfb' },
+  { color: 'from-[#667eea] to-[#764ba2]', bg: '#f5f3ff' },
+  { color: 'from-[#f093fb] to-[#f5576c]', bg: '#fff0f6' },
+  { color: 'from-[#4facfe] to-[#00c6fb]', bg: '#f0f8ff' },
+  { color: 'from-[#43e97b] to-[#1cb476]', bg: '#f0fff6' },
 ];
+const ICONS = [Award, Users, Clock, Shield, Lightbulb, HeartHandshake];
 
-const N = reasons.length;
+const N = ICONS.length;
 
 /* ── Dot indicator per card ─────────────────────────────────────── */
 function Dot({ index, scrollYProgress }: { index: number; scrollYProgress: MotionValue<number> }) {
@@ -71,7 +31,7 @@ function Dot({ index, scrollYProgress }: { index: number; scrollYProgress: Motio
 
 /* ── One full-width card ─────────────────────────────────────────── */
 interface BigCardProps {
-  reason: (typeof reasons)[number];
+  reason: { icon: typeof Award; title: string; description: string; color: string; bg: string };
   index: number;
   scrollYProgress: MotionValue<number>;
 }
@@ -146,20 +106,29 @@ function BigCard({ reason, index, scrollYProgress }: BigCardProps) {
 
 /* ── Scroll hint ─────────────────────────────────────────────────── */
 function ScrollHint({ scrollYProgress }: { scrollYProgress: MotionValue<number> }) {
+  const { t } = useLang();
   const opacity = useTransform(scrollYProgress, [0, 0.05, 0.85, 0.95], [0, 1, 1, 0]);
   return (
     <motion.p
       style={{ opacity }}
       className="text-center text-sm text-gray-400 tracking-wide"
     >
-      ↓ Lướt để xem thêm
+      {t.trust.scrollHint}
     </motion.p>
   );
 }
 
 /* ── Main export ─────────────────────────────────────────────────── */
 export function TrustSection() {
+  const { t } = useLang();
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const reasons = t.trust.items.map((item, i) => ({
+    icon: ICONS[i],
+    title: item.title,
+    description: item.description,
+    ...COLORS[i],
+  }));
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -187,10 +156,10 @@ export function TrustSection() {
           className="text-center pt-16 pb-2 shrink-0"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-[#1a2332] mb-3">
-            Tại sao chọn ECOCASA?
+            {t.trust.title}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Chúng tôi tự hào mang đến trải nghiệm tốt nhất cho khách hàng
+            {t.trust.subtitle}
           </p>
         </motion.div>
 

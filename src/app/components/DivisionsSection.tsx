@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Building2, Sparkles, ArrowRight } from 'lucide-react';
+import { useLang } from '../context/LanguageContext';
 
 interface DivisionsSectionProps {
   onOpenLiving: () => void;
@@ -7,6 +8,7 @@ interface DivisionsSectionProps {
 }
 
 export function DivisionsSection({ onOpenLiving, onOpenCosmetics }: DivisionsSectionProps) {
+  const { t } = useLang();
   return (
     <section id="ecosystem" className="py-[8.75rem] bg-white">
       <div className="max-w-[1400px] mx-auto px-6">
@@ -18,10 +20,10 @@ export function DivisionsSection({ onOpenLiving, onOpenCosmetics }: DivisionsSec
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-[#1a2332] mb-4">
-            Hệ sinh thái ECOCASA
+            {t.ecosystem.title}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Hai lĩnh vực chuyên nghiệp, một tầm nhìn chung về cuộc sống tinh tế
+            {t.ecosystem.subtitle}
           </p>
         </motion.div>
 
@@ -49,12 +51,7 @@ export function DivisionsSection({ onOpenLiving, onOpenCosmetics }: DivisionsSec
               </p>
 
               <ul className="space-y-3 mb-8">
-                {[
-                  'Thiết kế kiến trúc & nội thất',
-                  'Thi công trọn gói',
-                  'Quản lý dự án chuyên nghiệp',
-                  'Bảo hành dài hạn'
-                ].map((item) => (
+                {t.ecosystem.living.features.map((item) => (
                   <li key={item} className="flex items-center gap-3 text-white/80">
                     <div className="w-1.5 h-1.5 bg-[#8b6f47] rounded-full" />
                     {item}
@@ -66,7 +63,7 @@ export function DivisionsSection({ onOpenLiving, onOpenCosmetics }: DivisionsSec
                 onClick={onOpenLiving}
                 className="inline-flex items-center gap-2 text-[#8b6f47] font-medium group-hover:gap-3 transition-all cursor-pointer"
               >
-                Tìm hiểu thêm
+                {t.ecosystem.living.btn}
                 <ArrowRight className="w-5 h-5" />
               </button>
             </div>
@@ -98,12 +95,7 @@ export function DivisionsSection({ onOpenLiving, onOpenCosmetics }: DivisionsSec
               </p>
 
               <ul className="space-y-3 mb-8">
-                {[
-                  'Shampoo chuyên sâu',
-                  'Dầu xả phục hồi',
-                  'Tinh dầu dưỡng tóc',
-                  'Mặt nạ tóc cao cấp'
-                ].map((item) => (
+                {t.ecosystem.cosmetics.features.map((item) => (
                   <li key={item} className="flex items-center gap-3 text-white/90">
                     <div className="w-1.5 h-1.5 bg-white rounded-full" />
                     {item}
@@ -115,7 +107,7 @@ export function DivisionsSection({ onOpenLiving, onOpenCosmetics }: DivisionsSec
                 onClick={onOpenCosmetics}
                 className="inline-flex items-center gap-2 text-white font-medium group-hover:gap-3 transition-all cursor-pointer"
               >
-                Khám phá sản phẩm
+                {t.ecosystem.cosmetics.btn}
                 <ArrowRight className="w-5 h-5" />
               </button>
             </div>

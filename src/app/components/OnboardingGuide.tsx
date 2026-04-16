@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { flushSync } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Home, Sparkles } from 'lucide-react';
+import { useLang } from '../context/LanguageContext';
 
 interface BtnRect { top: number; left: number; width: number; height: number }
 
@@ -88,6 +89,7 @@ function Tooltip({ r, icon, title, desc, accentColor, arrowColor, delay = 0 }: T
 
 /* ── Main component ───────────────────────────────────────────────── */
 export function OnboardingGuide({ show, onDismiss }: OnboardingGuideProps) {
+  const { t } = useLang();
   const [rects, setRects] = useState<{ living: BtnRect | null; cosmetics: BtnRect | null }>({
     living: null,
     cosmetics: null,
@@ -160,8 +162,8 @@ export function OnboardingGuide({ show, onDismiss }: OnboardingGuideProps) {
         <Tooltip
           r={rects.living}
           icon={<Home className="w-3.5 h-3.5 shrink-0" />}
-          title="EcoCasa Living"
-          desc="Thiết kế & thi công nội thất cao cấp – nhấn để khám phá!"
+          title={t.onboarding.living.title}
+          desc={t.onboarding.living.desc}
           accentColor="#7a5c35"
           arrowColor="#7a5c35"
           delay={0.1}
@@ -171,8 +173,8 @@ export function OnboardingGuide({ show, onDismiss }: OnboardingGuideProps) {
         <Tooltip
           r={rects.cosmetics}
           icon={<Sparkles className="w-3.5 h-3.5 shrink-0" />}
-          title="PantioSalon"
-          desc="Chăm sóc tóc chuyên nghiệp cao cấp – nhấn để khám phá!"
+          title={t.onboarding.cosmetics.title}
+          desc={t.onboarding.cosmetics.desc}
           accentColor="#2C9A8F"
           arrowColor="#2C9A8F"
           delay={0.25}
@@ -202,7 +204,7 @@ export function OnboardingGuide({ show, onDismiss }: OnboardingGuideProps) {
               onClick={handleDismiss}
             >
               <X className="w-4 h-4 text-white/70" />
-              <span>Nhấn vào bất kỳ đâu để bắt đầu</span>
+              <span>{t.onboarding.hint}</span>
             </motion.div>
           </>
         )}

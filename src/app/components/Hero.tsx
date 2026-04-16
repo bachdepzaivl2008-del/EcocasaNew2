@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Award, Users, Star } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
+import { useLang } from '../context/LanguageContext';
 import heroBg from 'figma:asset/c993cc25fda3c9ab4cfc5d636153c75cabc07763.png';
 import picture1 from '../../assets/Picture 1.jpg';
 import picture2 from '../../assets/Picture 2.jpg';
@@ -17,6 +18,7 @@ interface HeroProps {
 }
 
 export function Hero({ onOpenLiving, onOpenCosmetics }: HeroProps) {
+  const { t } = useLang();
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 30 });
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -86,7 +88,7 @@ export function Hero({ onOpenLiving, onOpenCosmetics }: HeroProps) {
           >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white/90 text-xs uppercase tracking-widest font-medium mb-8">
               <span className="w-1.5 h-1.5 bg-[#d4af37] rounded-full animate-pulse" />
-              Premium Lifestyle Ecosystem
+              {t.hero.badge}
             </div>
           </motion.div>
 
@@ -97,10 +99,10 @@ export function Hero({ onOpenLiving, onOpenCosmetics }: HeroProps) {
             className="text-white mb-6"
           >
             <span className="block text-4xl md:text-6xl font-semibold mb-2 tracking-tight">
-              Thiết kế đậm chất
+              {t.hero.title1}
             </span>
             <span className="block text-4xl md:text-6xl font-light text-white/90 tracking-tight">
-              Cuộc sống an lành
+              {t.hero.title2}
             </span>
           </motion.h1>
 
@@ -110,7 +112,7 @@ export function Hero({ onOpenLiving, onOpenCosmetics }: HeroProps) {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-white/80 text-base md:text-lg mb-10 leading-relaxed max-w-xl font-light"
           >
-            Từ không gian sống tinh tế đến chăm sóc cá nhân chỉn chu, ECOCASA kiến tạo trải nghiệm sống hài hòa cho cuộc sống hiện đại.
+            {t.hero.subtitle}
           </motion.p>
 
           <motion.div
@@ -124,7 +126,7 @@ export function Hero({ onOpenLiving, onOpenCosmetics }: HeroProps) {
               onClick={onOpenLiving}
               className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-gradient-to-r from-[#8b6f47] to-[#6b5637] text-white rounded-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group"
             >
-              <span className="font-medium text-sm tracking-wide">Khám phá EcoCasa Living</span>
+              <span className="font-medium text-sm tracking-wide">{t.hero.btn1}</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
             <button
@@ -132,7 +134,7 @@ export function Hero({ onOpenLiving, onOpenCosmetics }: HeroProps) {
               onClick={onOpenCosmetics}
               className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white/5 backdrop-blur-sm text-white border border-white/30 rounded-md hover:bg-white/10 hover:border-white/50 transition-all duration-300"
             >
-              <span className="font-medium text-sm tracking-wide">Dịch vụ PantioSalon</span>
+              <span className="font-medium text-sm tracking-wide">{t.hero.btn2}</span>
             </button>
           </motion.div>
 
@@ -145,15 +147,15 @@ export function Hero({ onOpenLiving, onOpenCosmetics }: HeroProps) {
           >
             <div className="flex items-center gap-2">
               <Award className="w-4 h-4 text-[#8b6f47]" />
-              <span>Hơn 200+ dự án</span>
+              <span>{t.hero.stat1}</span>
             </div>
             <div className="flex items-center gap-2">
               <Users className="w-4 h-4 text-[#8b6f47]" />
-              <span>1000+ khách hàng</span>
+              <span>{t.hero.stat2}</span>
             </div>
             <div className="flex items-center gap-2">
               <Star className="w-4 h-4 text-[#8b6f47]" />
-              <span>Đánh giá 4.9/5.0</span>
+              <span>{t.hero.stat3}</span>
             </div>
           </motion.div>
         </div>
