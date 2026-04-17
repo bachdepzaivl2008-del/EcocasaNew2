@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Droplet, Shield, Leaf, ArrowRight } from 'lucide-react';
+import image01 from '../../assets/image01.jpg';
 
 export function HaircareFeature() {
   const features = [
@@ -34,7 +35,7 @@ export function HaircareFeature() {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-2xl group">
               <img
-                src="https://images.unsplash.com/photo-1758188753373-5b01a0fc6d9d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBoYWlyY2FyZSUyMHByb2R1Y3RzJTIwYm90dGxlc3xlbnwxfHx8fDE3NzQzMjYwNTJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
+                src={image01}
                 alt="PantioSalon Products"
                 className="w-full h-[600px] object-cover group-hover:scale-105 transition-transform duration-700"
               />
