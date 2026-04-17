@@ -33,13 +33,13 @@ export function HaircareFeature() {
             transition={{ duration: 0.6 }}
             className="relative order-2 lg:order-1"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl group">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl group bg-white">
               <img
                 src={image01}
                 alt="PantioSalon Products"
-                className="w-full h-[600px] object-cover group-hover:scale-105 transition-transform duration-700"
+                className="w-full h-[600px] object-contain group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#4FD1C5]/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#4FD1C5]/20 to-transparent pointer-events-none" />
             </div>
 
             {/* Floating Badge */}
