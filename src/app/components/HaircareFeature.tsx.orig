@@ -33,11 +33,11 @@ export function HaircareFeature() {
             transition={{ duration: 0.6 }}
             className="relative order-2 lg:order-1"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl group mx-auto w-fit">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl group bg-white">
               <img
                 src={image01}
                 alt="PantioSalon Products"
-                className="w-auto max-h-[600px] object-contain group-hover:scale-105 transition-transform duration-700"
+                className="w-full h-[600px] object-contain group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#4FD1C5]/20 to-transparent pointer-events-none" />
             </div>
@@ -60,14 +60,14 @@ export function HaircareFeature() {
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#4FD1C5]/10 rounded-full text-[#4FD1C5] text-sm font-medium mb-6">
               PantioSalon / EcoCasa Haircare
             </div>
-            
+
             <h2 className="text-4xl md:text-5xl font-bold text-[#1a2332] mb-6">
               Chăm sóc tóc chuyên sâu, tỏa sáng mỗi ngày
             </h2>
-            
+
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Dòng sản phẩm PantioSalon được phát triển với công thức độc quyền, 
-              kết hợp chiết xuất thiên nhiên và công nghệ tiên tiến từ Nhật Bản. 
+              Dòng sản phẩm PantioSalon được phát triển với công thức độc quyền,
+              kết hợp chiết xuất thiên nhiên và công nghệ tiên tiến từ Nhật Bản.
               Mang đến mái tóc khỏe đẹp, óng mượt và đầy sức sống.
             </p>
 
