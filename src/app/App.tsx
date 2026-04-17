@@ -46,7 +46,7 @@ export default function App() {
   return (
     <LanguageProvider>
     <CartProvider>
-      <SmoothScroll>
+      <SmoothScroll isLocked={showGuide && activePage === 'home'}>
         <div className="min-h-screen bg-white noise-bg">
           <TopBar />
           <Header activePage={activePage} onNavigateHome={handleBack} />

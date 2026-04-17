@@ -102,6 +102,7 @@ export function OnboardingGuide({ show, onDismiss }: OnboardingGuideProps) {
   const [showRings, setShowRings] = useState(false);
 
   const prevOverflow = useRef('');
+  const prevTouchAction = useRef('');
 
   const measure = useCallback(() => {
     const toRect = (el: HTMLElement | null): BtnRect | null => {
@@ -125,7 +126,9 @@ export function OnboardingGuide({ show, onDismiss }: OnboardingGuideProps) {
 
     // Lock scroll
     prevOverflow.current = document.body.style.overflow;
+    prevTouchAction.current = document.body.style.touchAction;
     document.body.style.overflow = 'hidden';
+    document.body.style.touchAction = 'none';
 
     // Force to top synchronously
     document.documentElement.scrollTop = 0;
@@ -148,6 +151,7 @@ export function OnboardingGuide({ show, onDismiss }: OnboardingGuideProps) {
 
     // Unlock scroll immediately
     document.body.style.overflow = prevOverflow.current;
+    document.body.style.touchAction = prevTouchAction.current;
 
     // Tell parent → triggers overlay/hint exit animation
     onDismiss();

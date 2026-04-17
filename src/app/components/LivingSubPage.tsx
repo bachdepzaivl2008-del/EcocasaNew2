@@ -31,7 +31,7 @@ export function LivingSubPage({ onBack }: LivingSubPageProps) {
             transition={{ delay: 0.3, duration: 0.6 }}
           >
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 max-w-3xl leading-tight">
-              Kiến tạo không gian sống <span className="text-[#d4af37]">đẳng cấp</span>
+              Kiến tạo không gian sống, <span className="text-[#d4af37]">chuẩn phong thuỷ ứng dụng</span>
             </h1>
             <p className="text-lg md:text-xl text-white/70 max-w-2xl leading-relaxed">
               Kiến trúc, nội thất và thi công trọn gói cho không gian sống hiện đại.

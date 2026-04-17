@@ -4,9 +4,10 @@ import 'lenis/dist/lenis.css';
 
 interface SmoothScrollProps {
   children: React.ReactNode;
+  isLocked?: boolean;
 }
 
-export function SmoothScroll({ children }: SmoothScrollProps) {
+export function SmoothScroll({ children, isLocked = false }: SmoothScrollProps) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
@@ -30,6 +31,16 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
       lenis.destroy();
     };
   }, []);
+
+  useEffect(() => {
+    if (lenisRef.current) {
+      if (isLocked) {
+        lenisRef.current.stop();
+      } else {
+        lenisRef.current.start();
+      }
+    }
+  }, [isLocked]);
 
   return <>{children}</>;
 }

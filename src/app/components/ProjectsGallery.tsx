@@ -43,7 +43,7 @@ export function ProjectsGallery() {
             Dự án tiêu biểu
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Khám phá những không gian sống đẳng cấp mà chúng tôi đã tạo nên
+            Khám phá những không gian sống, chuẩn phong thuỷ ứng dụng mà chúng tôi đã tạo nên
           </p>
         </motion.div>
 

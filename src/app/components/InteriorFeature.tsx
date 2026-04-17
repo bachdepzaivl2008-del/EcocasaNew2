@@ -6,7 +6,7 @@ export function InteriorFeature() {
     'Thiết kế kiến trúc độc quyền',
     'Nội thất cao cấp theo phong cách riêng',
     'Thi công trọn gói chìa khóa trao tay',
-    'Giám sát kỹ thuật chuyên nghiệp',
+    'Giám sát, QC chuyên nghiệp',
     'Vật liệu chính hãng, bảo hành dài hạn',
   ];
 
@@ -26,7 +26,7 @@ export function InteriorFeature() {
             </div>
             
             <h2 className="text-4xl md:text-5xl font-bold text-[#1a2332] mb-6">
-              Kiến tạo không gian sống đẳng cấp
+              Kiến tạo không gian sống, chuẩn phong thuỷ ứng dụng
             </h2>
             
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">

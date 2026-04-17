@@ -64,12 +64,12 @@ const translations = {
       subtitle: 'Chúng tôi tự hào mang đến trải nghiệm tốt nhất cho khách hàng',
       scrollHint: '↓ Lướt để xem thêm',
       items: [
-        { title: 'Chuyên nghiệp đẳng cấp', description: 'Đội ngũ kiến trúc sư và chuyên gia hàng đầu với hơn 10 năm kinh nghiệm, từng thực hiện hơn 200 dự án lớn nhỏ trên toàn quốc.' },
-        { title: 'Đồng hành tận tâm', description: 'Tư vấn miễn phí, hỗ trợ 24/7 trong suốt quá trình triển khai. Khách hàng luôn là trung tâm trong mọi quyết định của chúng tôi.' },
-        { title: 'Cam kết tiến độ', description: 'Hoàn thành đúng hạn, minh bạch từng giai đoạn công việc. Chúng tôi biết thời gian của bạn là vô giá.' },
+        { title: 'Chuyên nghiệp đẳng cấp', description: 'Đội ngũ Kiến trúc sư, QC hoạt động chuyên nghiệp với hàng chục năm kinh nghiệm, đã từng thiết kế và tổ chức thi công hàng trăm dự án lớn nhỏ khác nhau ở Đà nẵng và các tỉnh thành khu vực phía Bắc.' },
+        { title: 'Đồng hành tận tâm', description: 'Tư vấn miễn phí, hỗ trợ 24/7 trong suốt quá trình triển khai. Báo cáo thi công hàng ngày thông qua hình ảnh và video. Khách hàng luôn là trung tâm trong mọi quyết định của chúng tôi.' },
+        { title: 'Cam kết chất lượng, tiến độ, giá thành', description: 'Giá trị nhận được tương xứng với giá trị đầu tư, hoàn thành đúng hạn cam kết, minh bạch từng giai đoạn. Mọi vật liệu, phụ kiện đều minh bạch về nguồn gốc xuất xứ.' },
         { title: 'Bảo hành dài hạn', description: 'Chế độ bảo hành toàn diện, hỗ trợ sau bán hàng chuyên nghiệp. Mọi sản phẩm đều đi kèm cam kết chất lượng rõ ràng.' },
-        { title: 'Sáng tạo không giới hạn', description: 'Thiết kế độc quyền, phù hợp với cá tính và phong cách sống của từng gia đình. Chúng tôi không bao giờ dùng template có sẵn.' },
-        { title: 'Giá trị bền vững', description: 'Sản phẩm và dịch vụ thân thiện với môi trường, an toàn cho sức khoẻ. Chúng tôi xây dựng không gian sống xanh cho thế hệ tương lai.' },
+        { title: 'Sáng tạo không giới hạn', description: 'Thiết kế độc quyền, chuẩn phong thuỷ ứng dụng, mang lại sự thịnh vượng cho gia chủ, phù hợp với cá tính và phong cách sống của từng gia đình. Cam kết không dùng template có sẵn.' },
+        { title: 'Giá trị bền vững', description: 'Sản phẩm và dịch vụ thân thiện với môi trường, an toàn cho sức khoẻ, hướng tới một không gian sống xanh, sạch, đầy đủ các công năng cần thiết cho khách hàng.' },
       ],
     },
     stats: {
