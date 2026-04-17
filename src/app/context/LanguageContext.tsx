@@ -10,6 +10,7 @@ const translations = {
       ecosystem: 'Hệ sinh thái',
       whyEcocasa: 'Why Ecocasa',
       reviews: 'Đánh Giá',
+      news: 'Tin tức',
       livingIntro: 'Giới thiệu',
       livingProcess: 'Quy trình',
       livingProjects: 'Dự án',
@@ -86,6 +87,14 @@ const translations = {
       cosmetics: { title: 'PantioSalon', desc: 'Chăm sóc tóc chuyên nghiệp cao cấp – nhấn để khám phá!' },
       hint: 'Nhấn vào bất kỳ đâu để bắt đầu',
     },
+    news: {
+      title: 'Tin tức & Trải nghiệm',
+      subtitle: 'Cập nhật những xu hướng kiến trúc, làm đẹp và câu chuyện từ ECOCASA',
+      filterAll: 'Tất cả',
+      filterLiving: 'Ecocasa Living',
+      filterCosmetics: 'Ecocasa Cosmetics',
+      readMore: 'Chi tiết',
+    },
   },
 
   en: {
@@ -95,6 +104,7 @@ const translations = {
       ecosystem: 'Ecosystem',
       whyEcocasa: 'Why Ecocasa',
       reviews: 'Reviews',
+      news: 'News',
       livingIntro: 'Overview',
       livingProcess: 'Process',
       livingProjects: 'Projects',
@@ -170,6 +180,14 @@ const translations = {
       living: { title: 'EcoCasa Living', desc: 'Premium interior design & construction – tap to explore!' },
       cosmetics: { title: 'PantioSalon', desc: 'Professional premium hair care – tap to explore!' },
       hint: 'Tap anywhere to get started',
+    },
+    news: {
+      title: 'News & Experience',
+      subtitle: 'Updates on architecture, beauty trends, and stories from ECOCASA',
+      filterAll: 'All',
+      filterLiving: 'Ecocasa Living',
+      filterCosmetics: 'Ecocasa Cosmetics',
+      readMore: 'Read more',
     },
   },
 } as const;

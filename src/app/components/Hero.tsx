@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight, Award, Users, Star } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { useLang } from '../context/LanguageContext';
+import { MagneticButton } from './MagneticButton';
 import heroBg from 'figma:asset/c993cc25fda3c9ab4cfc5d636153c75cabc07763.png';
 import picture1 from '../../assets/Picture 1.jpg';
 import picture2 from '../../assets/Picture 2.jpg';
@@ -21,6 +22,9 @@ export function Hero({ onOpenLiving, onOpenCosmetics }: HeroProps) {
   const { t } = useLang();
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 30 });
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 1000], [0, 300]);
 
   const startAutoplay = useCallback((delay: number) => {
     if (timerRef.current) clearInterval(timerRef.current);
@@ -60,7 +64,7 @@ export function Hero({ onOpenLiving, onOpenCosmetics }: HeroProps) {
   return (
     <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden">
       {/* Background Image Carousel with Overlay */}
-      <div className="absolute inset-0 z-0 bg-[#11161d]">
+      <motion.div className="absolute inset-[-15%] z-0 bg-[#11161d]" style={{ y }}>
         <div className="overflow-hidden w-full h-full" ref={emblaRef}>
           <div className="flex w-full h-full">
             {images.map((img, index) => (
@@ -76,7 +80,7 @@ export function Hero({ onOpenLiving, onOpenCosmetics }: HeroProps) {
         </div>
         {/* Warmer overlay for interior feel and text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#11161d]/90 via-[#1a2332]/70 to-[#1a2332]/20" />
-      </div>
+      </motion.div>
 
       {/* Content */}
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 w-full mt-10">
@@ -121,21 +125,21 @@ export function Hero({ onOpenLiving, onOpenCosmetics }: HeroProps) {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4 mb-14"
           >
-            <button
+            <MagneticButton
               data-guide="living"
               onClick={onOpenLiving}
               className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-gradient-to-r from-[#8b6f47] to-[#6b5637] text-white rounded-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group"
             >
               <span className="font-medium text-sm tracking-wide">{t.hero.btn1}</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button
+            </MagneticButton>
+            <MagneticButton
               data-guide="cosmetics"
               onClick={onOpenCosmetics}
               className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white/5 backdrop-blur-sm text-white border border-white/30 rounded-md hover:bg-white/10 hover:border-white/50 transition-all duration-300"
             >
               <span className="font-medium text-sm tracking-wide">{t.hero.btn2}</span>
-            </button>
+            </MagneticButton>
           </motion.div>
 
           {/* Trust Badges */}

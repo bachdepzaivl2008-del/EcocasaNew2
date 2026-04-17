@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { Building2, Sparkles, ArrowRight } from 'lucide-react';
 import { useLang } from '../context/LanguageContext';
+import { MagneticButton } from './MagneticButton';
 
 interface DivisionsSectionProps {
   onOpenLiving: () => void;
@@ -59,13 +60,13 @@ export function DivisionsSection({ onOpenLiving, onOpenCosmetics }: DivisionsSec
                 ))}
               </ul>
 
-              <button
+              <MagneticButton
                 onClick={onOpenLiving}
                 className="inline-flex items-center gap-2 text-[#8b6f47] font-medium group-hover:gap-3 transition-all cursor-pointer"
               >
                 {t.ecosystem.living.btn}
                 <ArrowRight className="w-5 h-5" />
-              </button>
+              </MagneticButton>
             </div>
 
             {/* Background Pattern */}
@@ -103,13 +104,13 @@ export function DivisionsSection({ onOpenLiving, onOpenCosmetics }: DivisionsSec
                 ))}
               </ul>
 
-              <button
+              <MagneticButton
                 onClick={onOpenCosmetics}
                 className="inline-flex items-center gap-2 text-white font-medium group-hover:gap-3 transition-all cursor-pointer"
               >
                 {t.ecosystem.cosmetics.btn}
                 <ArrowRight className="w-5 h-5" />
-              </button>
+              </MagneticButton>
             </div>
 
             {/* Background Pattern */}

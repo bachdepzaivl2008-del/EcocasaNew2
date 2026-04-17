@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import logo from 'figma:asset/d7a716283c29c3993aea9f83ce8a77f06de84978.png';
 import { useCart } from '../context/CartContext';
 import { useLang, type Lang } from '../context/LanguageContext';
+import { MagneticButton } from './MagneticButton';
 import type { ActivePage } from '../App';
 
 interface NavLink { label: string; href: string }
@@ -27,6 +28,7 @@ function getNavLinks(page: ActivePage, t: ReturnType<typeof useLang>['t']): NavL
     { label: t.nav.ecosystem,   href: '#ecosystem' },
     { label: t.nav.whyEcocasa, href: '#why-ecocasa' },
     { label: t.nav.reviews,     href: '#reviews' },
+    { label: t.nav.news,        href: '#news' },
   ];
 }
 
@@ -108,11 +110,13 @@ export function Header({ activePage, onNavigateHome }: HeaderProps) {
 
   return (
     <header
-      className={`left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled ? 'fixed top-0 bg-white/95 backdrop-blur-md shadow-sm py-3' : 'absolute top-[36px] bg-transparent py-5'
+      className={`fixed left-0 right-0 z-50 transition-all duration-500 flex justify-center ${
+        scrolled ? 'top-2 sm:top-4 px-2 sm:px-4' : 'top-[36px] px-0'
       }`}
     >
-      <div className="max-w-[1400px] mx-auto px-6 flex items-center justify-between">
+      <div className={`w-full max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-between transition-all duration-500 ${
+        scrolled ? 'bg-white/95 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.08)] py-3 rounded-full border border-black/5' : 'bg-transparent py-5'
+      }`}>
 
         {/* Logo */}
         <div className="flex items-center gap-2">
@@ -124,9 +128,9 @@ export function Header({ activePage, onNavigateHome }: HeaderProps) {
             </button>
           )}
           <button onClick={isSubPage ? onNavigateHome : () => scrollTo('#')} className="flex items-center gap-3">
-            <img src={logo} alt="ECOCASA Logo" className="w-11 h-11 rounded-full object-cover shadow-sm" />
-            <div className={`font-bold text-xl tracking-tight ${scrolled ? 'text-[#1a2332]' : 'text-white drop-shadow-md'}`}>
-              ECOCASA
+            <img src={logo} alt="ECOCASA Logo" className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover shadow-sm" />
+            <div className={`font-bold text-lg sm:text-xl tracking-tight ${scrolled ? 'text-[#1a2332]' : 'text-white drop-shadow-md'}`}>
+               ECOCASA
             </div>
           </button>
         </div>
@@ -174,19 +178,19 @@ export function Header({ activePage, onNavigateHome }: HeaderProps) {
           </button>
 
           {isSubPage ? (
-            <button
+            <MagneticButton
               onClick={() => { const id = activePage === 'living' ? 'living-contact' : 'cosmetics-contact'; const el = document.getElementById(id); if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' }); }}
-              className="px-6 py-2.5 bg-gradient-to-r from-[#8b6f47] to-[#6b5637] text-white text-sm font-medium rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+              className="px-6 py-2.5 bg-gradient-to-r from-[#8b6f47] to-[#6b5637] text-white text-sm font-medium rounded-full hover:shadow-[0_8px_20px_rgba(139,111,71,0.3)] transition-all duration-300"
             >
               {t.header.consult}
-            </button>
+            </MagneticButton>
           ) : (
-            <button
+            <MagneticButton
               onClick={() => scrollTo('#contact')}
-              className="px-6 py-2.5 bg-gradient-to-r from-[#8b6f47] to-[#6b5637] text-white text-sm font-medium rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+              className="px-6 py-2.5 bg-gradient-to-r from-[#8b6f47] to-[#6b5637] text-white text-sm font-medium rounded-full hover:shadow-[0_8px_20px_rgba(139,111,71,0.3)] transition-all duration-300"
             >
               {t.header.cta}
-            </button>
+            </MagneticButton>
           )}
         </div>
 
@@ -208,39 +212,53 @@ export function Header({ activePage, onNavigateHome }: HeaderProps) {
       </div>
 
       {/* Mobile menu */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-lg border-t border-gray-100">
-          <nav className="flex flex-col p-6 gap-1">
-            {isSubPage && (
-              <button onClick={() => { setMobileMenuOpen(false); onNavigateHome(); }}
-                className="flex items-center gap-2 font-medium py-3 px-4 rounded-lg text-[#8b6f47] bg-gray-50 mb-2"
-              >
-                <ArrowLeft className="w-4 h-4" /> {t.header.backHome}
-              </button>
-            )}
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.href;
-              return (
-                <button key={link.href} onClick={() => scrollTo(link.href)}
-                  className={`relative text-left font-medium py-3 px-4 rounded-lg transition-colors ${isActive ? 'text-[#8b6f47] bg-gray-50' : 'text-[#1a2332] hover:bg-gray-50'}`}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+            className={`lg:hidden absolute left-0 right-0 bg-white shadow-2xl border border-gray-100 ${scrolled ? 'top-[calc(100%+0.5rem)] rounded-3xl mx-2 sm:mx-4' : 'top-full rounded-b-3xl'}`}
+          >
+            <nav className="flex flex-col p-6 gap-1">
+              {isSubPage && (
+                <motion.button 
+                  initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.05 }}
+                  onClick={() => { setMobileMenuOpen(false); onNavigateHome(); }}
+                  className="flex items-center gap-2 font-medium py-3 px-4 rounded-xl text-[#8b6f47] bg-gray-50 mb-2"
                 >
-                  {isActive && (
-                    <motion.div layoutId="activeMobilePill" className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-1/2 bg-[#d4af37] rounded-r-full" />
-                  )}
-                  {link.label}
-                </button>
-              );
-            })}
-            {!isSubPage && (
-              <button onClick={() => scrollTo('#contact')}
-                className="px-6 py-3 bg-gradient-to-r from-[#8b6f47] to-[#6b5637] text-white rounded-lg text-center mt-4 font-medium"
-              >
-                {t.header.cta}
-              </button>
-            )}
-          </nav>
-        </div>
-      )}
+                  <ArrowLeft className="w-4 h-4" /> {t.header.backHome}
+                </motion.button>
+              )}
+              {navLinks.map((link, i) => {
+                const isActive = activeSection === link.href;
+                return (
+                  <motion.button 
+                    initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.05 + i * 0.03 }}
+                    key={link.href} onClick={() => scrollTo(link.href)}
+                    className={`relative text-left font-medium py-3 px-4 rounded-xl transition-colors ${isActive ? 'text-[#8b6f47] bg-[#8b6f47]/5' : 'text-[#1a2332] hover:bg-gray-50'}`}
+                  >
+                    {isActive && (
+                      <motion.div layoutId="activeMobilePill" className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-1/2 bg-[#d4af37] rounded-r-full" />
+                    )}
+                    {link.label}
+                  </motion.button>
+                );
+              })}
+              {!isSubPage && (
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+                  <MagneticButton onClick={() => scrollTo('#contact')}
+                    className="w-full px-6 py-3.5 bg-gradient-to-r from-[#8b6f47] to-[#6b5637] text-white rounded-xl text-center mt-4 font-medium shadow-md shadow-[#8b6f47]/20"
+                  >
+                    {t.header.cta}
+                  </MagneticButton>
+                </motion.div>
+              )}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
