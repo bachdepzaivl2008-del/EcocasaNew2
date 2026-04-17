@@ -76,21 +76,28 @@ function BigCard({ reason, index, scrollYProgress }: BigCardProps) {
     >
       {/* Card */}
       <div
-        className="w-full max-w-5xl mx-auto rounded-3xl shadow-2xl overflow-hidden grid md:grid-cols-2"
-        style={{ minHeight: 'auto', background: reason.bg }}
+        className="w-full max-w-5xl mx-auto rounded-3xl shadow-2xl overflow-hidden grid md:grid-cols-2 md:min-h-[480px]"
+        style={{ background: reason.bg }}
       >
-        {/* Left – coloured icon panel */}
-        <div className={`bg-gradient-to-br ${reason.color} flex flex-col items-center justify-center gap-4 md:gap-6 p-8 md:p-16`}>
-          <div className="w-28 h-28 bg-white/15 backdrop-blur-sm rounded-3xl flex items-center justify-center shadow-inner">
-            <Icon className="w-16 h-16 text-white drop-shadow-md" />
+        {/* Left – Image / Gradient Panel */}
+        <div className={`relative bg-gradient-to-br ${reason.color} flex flex-col items-center justify-center p-8 md:p-16 overflow-hidden`}>
+          {/* 
+            FUTURE IMAGE INTEGRATION:
+            You can add an <img> tag here with className="absolute inset-0 w-full h-full object-cover"
+            to replace the gradient backgrounds.
+          */}
+          <div className="relative z-10 flex flex-col items-center gap-4 md:gap-6">
+            <div className="w-28 h-28 bg-white/15 backdrop-blur-sm rounded-3xl flex items-center justify-center shadow-inner">
+              <Icon className="w-16 h-16 text-white drop-shadow-md" />
+            </div>
+            <span className="text-white/55 text-xs font-semibold tracking-[0.2em] uppercase select-none">
+              {String(index + 1).padStart(2, '0')} &nbsp;/&nbsp; {String(N).padStart(2, '0')}
+            </span>
           </div>
-          <span className="text-white/55 text-xs font-semibold tracking-[0.2em] uppercase select-none">
-            {String(index + 1).padStart(2, '0')} &nbsp;/&nbsp; {String(N).padStart(2, '0')}
-          </span>
         </div>
 
         {/* Right – text content */}
-        <div className="flex flex-col justify-center gap-4 md:gap-5 p-6 sm:p-8 md:p-14">
+        <div className="flex flex-col justify-center gap-4 md:gap-5 p-6 sm:p-8 md:p-14 bg-white/50 backdrop-blur-[2px]">
           <h3 className="text-2xl md:text-4xl font-bold text-[#1a2332] leading-snug">
             {reason.title}
           </h3>
